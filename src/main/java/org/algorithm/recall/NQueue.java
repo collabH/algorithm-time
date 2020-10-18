@@ -13,6 +13,12 @@ import java.util.Set;
  * @date: 2020/10/16 5:00 下午
  */
 public class NQueue {
+    public static void main(String[] args) {
+        NQueue nQueue = new NQueue();
+        List<List<String>> lists = nQueue.solveNQueens(4);
+        System.out.println(lists);
+    }
+
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> solutions = new ArrayList<List<String>>();
         int[] queens = new int[n];
