@@ -8,3 +8,4 @@
 ## datastructure
 
 * array:数组
+* inn: 栈

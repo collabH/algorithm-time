@@ -81,6 +81,7 @@ public class Arr<E> {
         System.arraycopy(data, index + 1, data, index, size - index);
         // help gc
         data[size] = null;
+        size--;
         return removeData;
     }
 
