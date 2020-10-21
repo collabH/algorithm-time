@@ -17,7 +17,7 @@ public class LeetCode188 {
                     dpTable[i][j][1] = -prices[i];
                     continue;
                 }
-                dpTable[i][j][0] = Math.max(dpTable[i - 1][j][0], dpTable[i - 1][j - 1][1] + prices[i]);
+                dpTable[i][j][0] = Math.max(dpTable[i - 1][j][0], dpTable[i - 1][j][1] + prices[i]);
                 dpTable[i][j][1] = Math.max(dpTable[i - 1][j][1], dpTable[i - 1][j - 1][0] - prices[i]);
             }
         }
