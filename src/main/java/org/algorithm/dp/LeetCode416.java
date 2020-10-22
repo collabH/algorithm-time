@@ -54,4 +54,41 @@ public class LeetCode416 {
         }
         return dp[n - 1][target];
     }
+
+    public static void main(String[] args) {
+        LeetCode416 leetCode416 = new LeetCode416();
+        int[] nums = {2, 2, 3, 5};
+        System.out.println(leetCode416.canPartition1(nums));
+        System.out.println(leetCode416.canPartition(nums));
+    }
+
+    // 压缩状态
+    public boolean canPartition1(int[] nums) {
+        int n = nums.length;
+        if (n < 2) {
+            return false;
+        }
+        int sum = 0, maxNum = 0;
+        for (int num : nums) {
+            sum += num;
+            maxNum = Math.max(maxNum, num);
+        }
+        if (sum % 2 != 0) {
+            return false;
+        }
+        int target = sum / 2;
+        if (maxNum > target) {
+            return false;
+        }
+        boolean[] dp = new boolean[target + 1];
+        // base case
+        dp[0] = true;
+        for (int i = 0; i < n; i++) {
+            int num = nums[i];
+            for (int j = target; j>=num; j--) {
+                dp[j] = dp[j] | dp[j - num];
+            }
+        }
+        return dp[target];
+    }
 }
