@@ -1,7 +1,6 @@
 package org.algorithm.dp;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * @fileName: DpCoin.java
@@ -12,7 +11,7 @@ import java.util.Map;
 public class DpCoin {
     public static void main(String[] args) {
         int[] coins = new int[]{1, 2, 5};
-        System.out.println(coinChangeIter(coins, 12));
+        System.out.println(coinChange(coins, 12));
     }
 
     /**
@@ -55,18 +54,29 @@ public class DpCoin {
         return -1;
     }
 
-    static int coinChangeIter(int[] coins, int amount) {
-        Map<Integer, Integer> dp = new HashMap<>();
-        dp.put(amount + 1, amount + 1);
-        // base case
-        dp.put(0, 0);
-        for (int i = 0; i < dp.size(); i++) {
-            for (int coin : coins) {
-                if (i - coin < 0) continue;
-                dp.put(i, Math.min(dp.get(i), 1 + dp.get(i - coin)));
+    public int coinChange1(int[] coins, int amount) {
+        // 自底向上的动态规划
+        if (coins.length == 0) {
+            return -1;
+        }
+        // memo[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
+        int[] memo = new int[amount + 1];
+        // 给memo赋初值，最多的硬币数就是全部使用面值1的硬币进行换
+        // amount + 1 是不可能达到的换取数量，于是使用其进行填充
+        Arrays.fill(memo, amount + 1);
+        memo[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i - coins[j] >= 0) {
+                    // memo[i]有两种实现的方式，
+                    // 一种是包含当前的coins[i],那么剩余钱就是 i-coins[i],这种操作要兑换的硬币数是 memo[i-coins[j]] + 1
+                    // 另一种就是不包含，要兑换的硬币数是memo[i]
+                    memo[i] = Math.min(memo[i], memo[i - coins[j]] + 1);
+                }
             }
         }
-        return dp.get(amount) == amount + 1 ? -1 : dp.get(amount);
+        return memo[amount] == (amount + 1) ? -1 : memo[amount];
     }
+
 
 }
