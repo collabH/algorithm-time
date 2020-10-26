@@ -38,7 +38,6 @@ public class LeetCode704 {
         }
         int left = 0, right = length - 1;
         while (left <= right) {
-            // 这
             int mid = left + (right - left) / 2;
             // 左边搜索
             if (nums[mid] == target) {

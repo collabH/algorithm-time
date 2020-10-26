@@ -26,16 +26,15 @@ public class LeetCode887 {
 
         // 初始化：填写下标为 0、1 的行和下标为 0、1 的列
         // 第 0 行：楼层为 0 的时候，不管鸡蛋个数多少，都测试不出鸡蛋的 F 值，故全为 0
+        // base case
         for (int j = 0; j <= K; j++) {
             dp[0][j] = 0;
         }
-
         // 第 1 行：楼层为 1 的时候，0 个鸡蛋的时候，扔 0 次，1 个以及 1 个鸡蛋以上只需要扔 1 次
         dp[1][0] = 0;
         for (int j = 1; j <= K; j++) {
             dp[1][j] = 1;
         }
-
         // 第 0 列：鸡蛋个数为 0 的时候，不管楼层为多少，也测试不出鸡蛋的 F 值，故全为 0
         // 第 1 列：鸡蛋个数为 1 的时候，这是一种极端情况，要试出 F 值，最少次数就等于楼层高度（想想复杂度的定义）
         for (int i = 0; i <= N; i++) {
@@ -55,5 +54,59 @@ public class LeetCode887 {
             }
         }
         return dp[N][K];
+    }
+
+    // O(nlogn)
+    int superEggDrop1(int K, int N) {
+        // m 最多不会超过 N 次（线性扫描）
+        int[][] dp = new int[K + 1][N + 1];
+        // base case:
+        for (int j = 0; j <= K; j++) {
+            dp[j][0] = 0;
+        }
+        for (int i = 0; i <= N; i++) {
+            dp[0][i] = 0;
+            dp[1][i] = i;
+        }
+        // dp[0][..] = 0
+        // dp[..][0] = 0
+        // Java 默认初始化数组都为 0
+        int m = 0;
+        while (dp[K][m] < N) {
+            m++;
+            for (int k = 1; k <= K; k++)
+                // 总楼层=上楼层(没碎)+下楼层(碎楼)+中间楼层
+                dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1;
+        }
+        return m;
+    }
+
+    // 配合二分搜索法
+    int superEggDrop2(int K, int N) {
+        // m 最多不会超过 N 次（线性扫描）
+        int[][] dp = new int[K + 1][N + 1];
+        // base case:
+        for (int j = 0; j <= K; j++) {
+            dp[j][0] = 0;
+        }
+        for (int i = 0; i <= N; i++) {
+            dp[0][i] = 0;
+            dp[1][i] = i;
+        }
+        int left = 1, right = N;
+        while (left < right) {
+            int mid = right - (right + left) / 2;
+            if (dp[K][mid] < N) {
+                left = mid + 1;
+            } else if (dp[K][mid] > N) {
+                right = mid;
+            } else {
+                return mid;
+            }
+            for (int k = 1; k <= K; k++)
+                // 总楼层=上楼层(没碎)+下楼层(碎楼)+中间楼层
+                dp[k][mid] = dp[k][mid - 1] + dp[k - 1][mid - 1] + 1;
+        }
+        return 0;
     }
 }
