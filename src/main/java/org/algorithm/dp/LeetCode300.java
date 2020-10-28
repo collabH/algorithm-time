@@ -19,21 +19,16 @@ public class LeetCode300 {
             return 0;
         }
         int[] dp = new int[n];
-        // base case
+        int max = 0;
         for (int i = 0; i < n; i++) {
+            // base case
             dp[i] = 1;
-        }
-        for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
+                max = Math.max(i, max);
             }
-        }
-
-        int max = 0;
-        for (int i : dp) {
-            max = Math.max(i, max);
         }
         return max;
     }

@@ -1,5 +1,10 @@
 package org.datastructure.tree;
 
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * @fileName: BinarySearchTree.java
  * @description: 二分搜索树
@@ -16,7 +21,22 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
 
         bst.preOrder();
-        System.out.println();
+        System.out.println("--");
+        bst.preOrderNR();
+        System.out.println("--");
+        bst.inOrder();
+        System.out.println("--");
+        bst.bfs();
+        System.out.println("--");
+        bst.postOrder();
+        System.out.println("--");
+        System.out.println(bst);
+
+
+        System.out.println("--");
+        System.out.println(bst.removeMax());
+        System.out.println(bst);
+        System.out.println(bst.removeMin());
         System.out.println(bst);
     }
 
@@ -49,9 +69,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
         // 插入右子树
         if (node.e.compareTo(e) > 0) {
-            node.right = add(node.right, e);
-        } else if (node.e.compareTo(e) < 0) {
             node.left = add(node.left, e);
+        } else if (node.e.compareTo(e) < 0) {
+            node.right = add(node.right, e);
         }
         return node;
     }
@@ -80,9 +100,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (root.e.compareTo(e) == 0) {
             return true;
         } else if (root.e.compareTo(e) > 0) {
-            return contains(root.right, e);
-        } else {
             return contains(root.left, e);
+        } else {
+            return contains(root.right, e);
         }
     }
 
@@ -94,11 +114,47 @@ public class BinarySearchTree<E extends Comparable<E>> {
         preOrder(root);
     }
 
-    public void preOrder(Node<E> node) {
+    private void preOrder(Node<E> node) {
         if (node != null) {
             System.out.println(node.e);
             preOrder(node.left);
             preOrder(node.right);
+        }
+    }
+
+    /**
+     * 非递归前序遍历
+     */
+    private void preOrderNR() {
+        Stack<Node<E>> stack = new Stack<>();
+        if (root != null) {
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                Node<E> cur = stack.pop();
+                System.out.println(cur.e);
+
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                }
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
+            }
+        }
+    }
+
+    /**
+     * 左根右
+     */
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    private void inOrder(Node<E> node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.println(node.e);
+            inOrder(node.right);
         }
     }
 
@@ -110,10 +166,173 @@ public class BinarySearchTree<E extends Comparable<E>> {
         postOrder(root);
     }
 
-    public void postOrder(Node<E> node) {
+    private void postOrder(Node<E> node) {
         if (node != null) {
             preOrder(node.left);
             preOrder(node.right);
+            System.out.println(node.e);
+        }
+    }
+
+    /**
+     * 层序遍历，广度有限遍历
+     */
+    public void bfs() {
+        Queue<Node<E>> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                Node<E> cur = queue.remove();
+                System.out.println(cur.e);
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+        }
+    }
+
+    public E minimum() {
+        if (root == null) {
+            throw new IllegalArgumentException();
+        }
+        return minimum(root).e;
+    }
+
+    /**
+     * 最小值的节点
+     *
+     * @return
+     */
+    public Node<E> minimum(Node<E> node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    public E maximum() {
+        if (root == null) {
+            throw new IllegalArgumentException();
+        }
+        return maximum(root).e;
+    }
+
+    /**
+     * 最大值节点
+     *
+     * @param node
+     * @return
+     */
+    public Node<E> maximum(Node<E> node) {
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    public E removeMin() {
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    private Node<E> removeMin(Node<E> node) {
+        if (node.left == null) {
+            Node<E> rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    public E removeMax() {
+        E maximum = maximum();
+        root = removeMax(root);
+        return maximum;
+    }
+
+    public Node<E> removeMax(Node<E> node) {
+        if (node.right == null) {
+            Node<E> leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
+    }
+
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+    private Node<E> remove(Node<E> node, E e) {
+        if (node == null) {
+            return null;
+        }
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            if (node.left == null) {
+                Node<E> rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            } else if (node.right == null) {
+                Node<E> leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }   // 如果存在左右孩子节点，找到node的后继，右节点的左节点
+            Node<E> successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            return successor;
+        }
+    }
+
+    /**
+     * 使用删除节点的前驱来替代删除的节点
+     *
+     * @param node
+     * @param e
+     * @return
+     */
+    private Node<E> remove1(Node<E> node, E e) {
+        if (node == null) {
+            return null;
+        }
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            if (node.left == null) {
+                Node<E> rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            } else if (node.right == null) {
+                Node<E> leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }   // 如果存在左右孩子节点，找到node的前驱，右节点的左节点
+            Node<E> successor = maximum(node.left);
+            successor.left = removeMax(node.left);
+            successor.right = node.right;
+            return successor;
         }
     }
 
