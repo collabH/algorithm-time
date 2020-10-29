@@ -16,18 +16,18 @@ public class LeetCode203 {
             if (curr.val == val) {
                 pre.next = curr.next;
             } else {
-                pre =curr;
+                pre = curr;
             }
             curr = curr.next;
         }
         return pred.next;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
+    public static class ListNode {
+        public int val;
+        public ListNode next;
 
-        ListNode(int x) {
+        public ListNode(int x) {
             val = x;
         }
     }
