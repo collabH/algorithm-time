@@ -1,4 +1,4 @@
-package org.algorithm.bst;
+package org.algorithm.tree;
 
 /**
  * @fileName: LeetCode701.java
