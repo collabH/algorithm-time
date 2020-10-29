@@ -1,4 +1,4 @@
-package org.algorithm.tree;
+package org.algorithm.datastructure.tree.bst;
 
 import java.util.ArrayList;
 import java.util.List;

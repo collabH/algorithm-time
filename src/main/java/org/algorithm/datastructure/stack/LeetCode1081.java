@@ -1,4 +1,4 @@
-package org.algorithm.datastructure;
+package org.algorithm.datastructure.stack;
 
 import java.util.Stack;
 

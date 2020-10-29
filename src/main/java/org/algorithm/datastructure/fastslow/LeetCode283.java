@@ -1,4 +1,4 @@
-package org.algorithm.datastructure;
+package org.algorithm.datastructure.fastslow;
 
 /**
  * @fileName: LeetCode283.java

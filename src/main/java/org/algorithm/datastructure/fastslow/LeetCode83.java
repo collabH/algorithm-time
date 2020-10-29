@@ -1,4 +1,4 @@
-package org.algorithm.datastructure;
+package org.algorithm.datastructure.fastslow;
 
 import org.datastructure.linkedlist.LeetCode203;
 
