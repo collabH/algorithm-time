@@ -85,6 +85,16 @@ public class Arr<E> {
         return removeData;
     }
 
+    // 交换索引i和索引j的位置
+    public void swap(int i, int j) {
+        if (i<0||i>=size||j<0||j<0||j>=size){
+            throw new IllegalArgumentException();
+        }
+        E datum = data[i];
+        data[i]=data[j];
+        data[j]=datum;
+    }
+
     @Override
     public String toString() {
         return "Arr{" +
