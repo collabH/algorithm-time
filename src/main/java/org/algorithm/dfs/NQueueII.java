@@ -1,4 +1,4 @@
-package org.algorithm.recall;
+package org.algorithm.dfs;
 
 import java.util.Arrays;
 import java.util.HashSet;

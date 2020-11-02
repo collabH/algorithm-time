@@ -7,7 +7,7 @@ import java.util.Queue;
 
 /**
  * @fileName: LeetCodeOffer55.java
- * @description: 计算二叉树的深度
+ * @description: 计算二叉树的深度 层序遍历
  * @author: by echo huang
  * @date: 2020/10/30 2:57 下午
  */

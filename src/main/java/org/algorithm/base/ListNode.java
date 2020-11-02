@@ -7,4 +7,8 @@ public class ListNode {
     public ListNode(int x) {
         val = x;
     }
+    public ListNode(int x,ListNode cur) {
+        val = x;
+        next=cur;
+    }
 }

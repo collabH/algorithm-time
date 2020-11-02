@@ -2,8 +2,6 @@ package org.datastructure.queue;
 
 import org.datastructure.array.Arr;
 
-import java.lang.reflect.Array;
-
 /**
  * @fileName: PriorityQueue.java
  * @description: 自定义优先级队列
@@ -99,6 +97,7 @@ public class MaxHeap<E extends Comparable<E>> {
 
     /**
      * 将最大的max替换为新加的e
+     *
      * @param e
      * @return
      */

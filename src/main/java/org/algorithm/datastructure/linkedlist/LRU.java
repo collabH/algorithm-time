@@ -8,11 +8,11 @@ import java.util.LinkedHashMap;
  * @author: by echo huang
  * @date: 2020/10/30 4:36 下午
  */
-public class LeetCode146 {
+public class LRU {
     private LinkedHashMap<Integer, Integer> cache;
     private int cap;
 
-    public LeetCode146(int cap) {
+    public LRU(int cap) {
         this.cache = new LinkedHashMap<>(cap);
         this.cap = cap;
     }
