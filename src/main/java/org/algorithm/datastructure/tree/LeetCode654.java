@@ -1,4 +1,4 @@
-package org.algorithm.datastructure.tree.bst;
+package org.algorithm.datastructure.tree;
 
 import org.algorithm.base.TreeNode;
 
