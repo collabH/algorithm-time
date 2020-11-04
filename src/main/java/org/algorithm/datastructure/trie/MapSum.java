@@ -1,6 +1,9 @@
 package org.algorithm.datastructure.trie;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @fileName: MapSum.java
  * @description: LeetCode677
@@ -9,57 +12,59 @@ package org.algorithm.datastructure.trie;
  */
 public class MapSum {
 
+    private class Node {
+        private int value;
+        private Map<Character, Node> next;
+
+        public Node(int value) {
+            this.value = value;
+            next = new HashMap<>();
+        }
+
+        public Node() {
+            this(0);
+        }
+    }
+
     private Node root;
 
-    /**
-     * Initialize your data structure here.
-     */
     public MapSum() {
         root = new Node();
     }
 
     public void insert(String key, int val) {
-        Node node = root;
-        char[] charArray = key.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            int idx = charArray[i] - 'a';
-            if (node.children[idx] == null) {
-                node.children[idx] = new Node();
+        Node cur = this.root;
+        for (int i = 0; i < key.length(); i++) {
+            char c = key.charAt(i);
+            if (!cur.next.containsKey(c)) {
+                cur.next.put(c, new Node());
             }
-            node = node.children[idx];
+            cur = cur.next.get(c);
         }
-        // 遍历结束
-        node.value = val;
+        cur.value = val;
     }
 
     public int sum(String prefix) {
-        if (prefix == null) return 0;
-        Node node = root;
-        char[] charArray = prefix.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            int idx = charArray[i] - 'a';
-            if (node.children[idx] == null) return 0;
-            node = node.children[idx];
+        Node cur = this.root;
+        for (int i = 0; i < prefix.length(); i++) {
+            char c = prefix.charAt(i);
+            if (!cur.next.containsKey(c)) {
+                return 0;
+            }
+            cur = cur.next.get(c);
         }
-        return dfs(node);
+        return sum(cur);
     }
 
-    private int dfs(Node node) {
-        if (node == null) return 0;
-        int res = node.value;
-        for (Node child : node.children) {
-            res += dfs(child);
+    private int sum(Node node) {
+        if (node.next.size() == 0) {
+            return node.value;
         }
-        return res;
-    }
-
-    class Node {
-        Node[] children;
-        int value;
-
-        public Node() {
-            children = new Node[26];
+        int result = node.value;
+        for (Character c : node.next.keySet()) {
+            result += sum(node.next.get(c));
         }
+        return result;
     }
 
 
