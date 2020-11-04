@@ -1,4 +1,4 @@
-package org.datastructure.inn;
+package org.datastructure.stack;
 
 /**
  * @fileName: Stack.java

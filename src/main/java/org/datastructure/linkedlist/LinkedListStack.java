@@ -1,6 +1,6 @@
 package org.datastructure.linkedlist;
 
-import org.datastructure.inn.Stack;
+import org.datastructure.stack.Stack;
 
 /**
  * @fileName: LinkedListStack.java

@@ -1,4 +1,4 @@
-package org.datastructure.inn;
+package org.datastructure.stack;
 
 import org.datastructure.array.Arr;
 

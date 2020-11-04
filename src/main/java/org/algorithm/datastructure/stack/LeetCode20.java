@@ -1,4 +1,4 @@
-package org.algorithm.stack;
+package org.algorithm.datastructure.stack;
 
 import java.util.HashMap;
 import java.util.Map;
