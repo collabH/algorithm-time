@@ -37,4 +37,9 @@ public class LeetCode316 {
         }
         return sb.reverse().toString();
     }
+
+    public static void main(String[] args) {
+        LeetCode316 leetCode316 = new LeetCode316();
+        leetCode316.removeDuplicateLetters("bcabc");
+    }
 }
