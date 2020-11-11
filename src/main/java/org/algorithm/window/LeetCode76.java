@@ -39,12 +39,13 @@ public class LeetCode76 {
                 right++;
                 continue;
             }
+            //已有字符串中目标字符出现的次数+1
+
             //当且仅当已有字符串目标字符出现的次数小于目标字符串字符的出现次数时，count才会+1
             //是为了后续能直接判断已有字符串是否已经包含了目标字符串的所有字符，不需要挨个比对字符出现的次数
             if (have[r] < need[r]) {
                 count++;
             }
-            //已有字符串中目标字符出现的次数+1
             have[r]++;
             //移动右指针
             right++;
@@ -108,7 +109,7 @@ public class LeetCode76 {
                 continue;
             }
 
-            if (window.getOrDefault(c,0) < need.getOrDefault(c,0)) {
+            if (window.getOrDefault(c, 0) < need.getOrDefault(c, 0)) {
                 count++;
             }
 
@@ -130,7 +131,7 @@ public class LeetCode76 {
                 }
                 //如果左边即将要去掉的字符被目标字符串需要，且出现的频次正好等于指定频次，那么如果去掉了这个字符，
                 //就不满足覆盖子串的条件，此时要破坏循环条件跳出循环，即控制目标字符串指定字符的出现总频次(count）-1
-                if (window.getOrDefault(l,0).equals(need.getOrDefault(l,0))) {
+                if (window.getOrDefault(l, 0).equals(need.getOrDefault(l, 0))) {
                     count--;
                 }
                 //已有字符串中目标字符出现的次数-1

@@ -12,4 +12,5 @@ public class ListNode {
         val = x;
         next=cur;
     }
+
 }
