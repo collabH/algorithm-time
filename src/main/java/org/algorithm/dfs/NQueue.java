@@ -21,10 +21,14 @@ public class NQueue {
 
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> solutions = new ArrayList<List<String>>();
+        // 皇后个数
         int[] queens = new int[n];
         Arrays.fill(queens, -1);
+        // 存一列
         Set<Integer> columns = new HashSet<Integer>();
+        // 从左到右斜行
         Set<Integer> diagonals1 = new HashSet<Integer>();
+        // 从右到左斜行
         Set<Integer> diagonals2 = new HashSet<Integer>();
         backtrack(solutions, queens, n, 0, columns, diagonals1, diagonals2);
         return solutions;
