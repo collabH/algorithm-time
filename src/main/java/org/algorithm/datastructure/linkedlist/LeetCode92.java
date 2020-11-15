@@ -1,6 +1,7 @@
 package org.algorithm.datastructure.linkedlist;
 
 import org.algorithm.base.ListNode;
+import org.algorithm.datastructure.arr.LeetCode1;
 
 /**
  * @fileName: LeetCode92.java
@@ -13,7 +14,7 @@ public class LeetCode92 {
         if (head == null) {
             return null;
         }
-        if (m == 1) {
+        if (m == 0) {
             return reverseN(head, n);
         }
         head.next = reverseBetween(head.next, m - 1, n - 1);
@@ -24,7 +25,7 @@ public class LeetCode92 {
         LeetCode92 leetCode92 = new LeetCode92();
         ListNode listNode = new ListNode(1,
                 new ListNode(2, new ListNode(3, new ListNode(4))));
-        leetCode92.reverseBetween(listNode, 2, 3);
+        ListNode listNode1 = leetCode92.reverseBetween(listNode, 1, 3);
 
     }
 

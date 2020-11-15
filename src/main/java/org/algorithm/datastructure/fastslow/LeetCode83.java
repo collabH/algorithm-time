@@ -1,6 +1,6 @@
 package org.algorithm.datastructure.fastslow;
 
-import org.datastructure.linkedlist.LeetCode203;
+import org.algorithm.datastructure.linkedlist.LeetCode203;
 
 /**
  * @fileName: LeetCode83.java

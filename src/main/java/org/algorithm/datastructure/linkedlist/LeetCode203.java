@@ -1,4 +1,4 @@
-package org.datastructure.linkedlist;
+package org.algorithm.datastructure.linkedlist;
 
 /**
  * @fileName: LeetCode203.java
