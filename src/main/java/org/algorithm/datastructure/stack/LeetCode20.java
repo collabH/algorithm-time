@@ -16,6 +16,7 @@ public class LeetCode20 {
         System.out.println(leetCode20.isValid("(){}}{"));
     }
 
+
     public boolean isValid(String s) {
         if (s.length() % 2 != 0) {
             return false;
