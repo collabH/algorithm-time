@@ -1,6 +1,7 @@
 package org.algorithm.datastructure.arr;
 
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.PriorityQueue;
  */
 public class LeetCode347 {
 
-    public int[] topKFrequent(int[] nums, int k) {
+    public static int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> occurrences = new HashMap<>(nums.length);
         for (int num : nums) {
             occurrences.put(num, occurrences.getOrDefault(num, 0) + 1);
@@ -30,8 +31,10 @@ public class LeetCode347 {
         });
         for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
             int num = entry.getKey(), count = entry.getValue();
+            // 如果等于k
             if (queue.size() == k) {
                 assert queue.peek() != null;
+                // 最小堆堆顶小于count，替换位置
                 if (queue.peek()[1] < count) {
                     queue.poll();
                     queue.offer(new int[]{num, count});
@@ -47,4 +50,8 @@ public class LeetCode347 {
         return ret;
     }
 
+    public static void main(String[] args) {
+
+        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 2, 2, 2, 3, 4}, 2)));
+    }
 }
