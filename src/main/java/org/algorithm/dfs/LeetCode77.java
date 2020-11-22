@@ -24,12 +24,13 @@ public class LeetCode77 {
             res.add(new LinkedList<>(track));
             return;
         }
-        for (int i = start; i <= n; i++) {
-            if (track.contains(i)){
+        // 剪枝
+        for (int i = start; i <= n - (k - track.size()) + 1; i++) {
+            if (track.contains(i)) {
                 continue;
             }
             track.add(i);
-            dfs(n,k,i+1,track);
+            dfs(n, k, i + 1, track);
             track.removeLast();
         }
     }
