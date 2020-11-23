@@ -7,7 +7,7 @@ package org.algorithm.skill;
  * @date: 2020/11/23 11:29 上午
  */
 public class PrefixSum {
-    private int[] prefix;
+    public int[] prefix;
 
     /* 输入一个数组，构造前缀和 */
     public PrefixSum(int[] nums) {
