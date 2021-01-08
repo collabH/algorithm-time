@@ -58,6 +58,7 @@ public class Arr<E> {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("超出容量");
         }
+        // 将index后一位元素向后移动
         System.arraycopy(data, index, data, index + 1, size - index);
         data[index] = element;
         size++;
@@ -78,6 +79,7 @@ public class Arr<E> {
         E[] data = this.data;
         valid();
         E removeData = data[index];
+        // 将index+1之后的数据放到index后
         System.arraycopy(data, index + 1, data, index, size - index);
         // help gc
         data[size] = null;
@@ -87,7 +89,7 @@ public class Arr<E> {
 
     // 交换索引i和索引j的位置
     public void swap(int i, int j) {
-        if (i<0||i>=size||j<0||j<0||j>=size){
+        if (i < 0 || i >= size || j < 0 || j >= size){
             throw new IllegalArgumentException();
         }
         E datum = data[i];
