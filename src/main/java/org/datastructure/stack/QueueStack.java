@@ -30,6 +30,7 @@ public class QueueStack {
         // 将x之前的元素重新入队, a->x
         // n=2
         // x->a->b ==> a->b->x
+        // 这里每次将除了新加的元素拿出来重新放入队列，这样就可以保证先进来的元素变成后进的元素，后进的元素放入队列的头部，然后满足了栈的特性
         for (int i = 0; i < n; i++) {
             queue.offer(queue.poll());
         }
