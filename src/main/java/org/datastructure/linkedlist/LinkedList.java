@@ -32,6 +32,7 @@ public class LinkedList<E> {
     }
 
     private int size;
+    // 使用虚拟节点作为头节点
     private Node dummyHead;
 
     public LinkedList() {
