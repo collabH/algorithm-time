@@ -54,6 +54,7 @@ public class LinkedList<E> {
         for (int i = 0; i < index; i++) {
             pred = pred.next;
         }
+        // 在pred和pred.next中间插入新值e
         pred.next = new Node(e, pred.next);
         size++;
 
