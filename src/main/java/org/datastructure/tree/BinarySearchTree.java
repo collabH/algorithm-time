@@ -241,11 +241,13 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     private Node<E> removeMin(Node<E> node) {
         if (node.left == null) {
+            // 相当于移除根节点
             Node<E> rightNode = node.right;
             node.right = null;
             size--;
             return rightNode;
         }
+        // 当前节点的左子树等于左子树节点的右子树
         node.left = removeMin(node.left);
         return node;
     }
