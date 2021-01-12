@@ -10,6 +10,7 @@ import java.util.TreeMap;
  */
 public class Trie {
     private static class Node {
+        //是否是一个单词
         public boolean isWord;
         public TreeMap<Character, Node> next;
 
@@ -39,11 +40,14 @@ public class Trie {
         Node cur = this.root;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
+            // 如果不包含则添加至next中
             if (!cur.next.containsKey(c)) {
                 cur.next.put(c, new Node());
             }
+            // 获取c字符的next
             cur = cur.next.get(c);
         }
+        // 走完一个单词后，如果该单词字符不是一个单词则设置为单词标示
         if (!cur.isWord) {
             cur.isWord = true;
         }
@@ -54,7 +58,7 @@ public class Trie {
         Node cur = this.root;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            if (cur.next.containsKey(c)) {
+            if (!cur.next.containsKey(c)) {
                 return false;
             }
             cur = cur.next.get(c);
@@ -66,11 +70,17 @@ public class Trie {
         Node cur = this.root;
         for (int i = 0; i < prefix.length(); i++) {
             char c = prefix.charAt(i);
-            if (cur.next.containsKey(c)){
+            if (!cur.next.containsKey(c)){
                 return false;
             }
             cur = cur.next.get(c);
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+        trie.add("hello");
+        System.out.println(trie.isPrefix("hell"));
     }
 }

@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class BinarySearchTree<E extends Comparable<E>> {
     public static void main(String[] args) {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTree<Integer> bst = new org.datastructure.tree.BinarySearchTree<Integer>();
 
         int[] nums = {5, 3, 6, 8, 4, 1};
         for (int num : nums) {
