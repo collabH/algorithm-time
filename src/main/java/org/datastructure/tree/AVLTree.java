@@ -122,8 +122,10 @@ public class AVLTree<E extends Comparable<E>> {
 
     public boolean isBST() {
         List<E> list = new ArrayList<>();
+        // 中序便利出来的数据从小到大排列
         inOrder(root, list);
         for (int i = 1; i < list.size(); i++) {
+            // 如果第一个大于第二个元素则不是BST
             if (list.get(i - 1).compareTo(list.get(i)) > 0) {
                 return false;
             }
