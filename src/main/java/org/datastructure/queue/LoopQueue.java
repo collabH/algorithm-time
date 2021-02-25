@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class LoopQueue<E> implements Queue<E> {
 
+    // 循环队列存储数据数组
     private E[] data;
     // 队首索引
     private int front;
@@ -39,7 +40,9 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     private void resize(int cap) {
+        //扩容，重新创建队列
         E[] resizeQueue = (E[]) new Object[cap + 1];
+        // 遍历历史队列，将数组放入新队列位置
         for (int i = 0; i < size; i++) {
             // 防止数组越界
             resizeQueue[i] = data[(i + front) % data.length];

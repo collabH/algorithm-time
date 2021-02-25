@@ -19,13 +19,16 @@ public class ArrayQueue<E> implements Queue<E> {
         this(10);
     }
 
+
     @Override
     public void enqueue(E e) {
+        // 向数组尾部插入数据
         this.data.addLast(e);
     }
 
     @Override
     public E dequeue() {
+        // 移除头部数据，最早的数据越靠近头部
         return this.data.remove(0);
     }
 

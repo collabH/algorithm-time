@@ -19,6 +19,7 @@ public class ArrayStack<E> implements Stack<E> {
         System.out.println(stack);
 
     }
+    // 底层数据存储为数组
     Arr<E> array;
 
     public ArrayStack(int cap) {
@@ -39,11 +40,19 @@ public class ArrayStack<E> implements Stack<E> {
         return array.isEmpty();
     }
 
+    /**
+     * 向数组尾部插入数据
+     * @param e
+     */
     @Override
     public void push(E e) {
         array.addLast(e);
     }
 
+    /**
+     * 从尾部获取数据
+     * @return
+     */
     @Override
     public E pop() {
         return array.remove(array.size() - 1);
