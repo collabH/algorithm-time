@@ -9,6 +9,7 @@ import org.datastructure.stack.Stack;
  * @date: 2020/10/21 11:56 下午
  */
 public class LinkedListStack<E> implements Stack<E> {
+    // 底层数据存储使用链表
     private LinkedList<E> data;
 
     public LinkedListStack() {

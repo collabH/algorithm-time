@@ -20,27 +20,31 @@ public class BinarySearchTree<E extends Comparable<E>> {
             bst.add(num);
         }
 
-        bst.preOrder();
-        System.out.println("--");
-        bst.preOrderNR();
-        System.out.println("--");
+//        bst.preOrder();
+//        System.out.println("--");
+//        bst.preOrderNR();
+//        System.out.println("--");
+//        bst.inOrder();
+//        System.out.println("--");
+//        bst.bfs();
+//        System.out.println("--");
+//        bst.postOrder();
+//        System.out.println("--");
+//        System.out.println(bst);
+//
+//
+//        System.out.println("--");
+//        System.out.println(bst.removeMax());
+//        System.out.println(bst);
+//        System.out.println(bst.removeMin());
+//        System.out.println(bst);
+        System.out.println("----");
         bst.inOrder();
-        System.out.println("--");
-        bst.bfs();
-        System.out.println("--");
-        bst.postOrder();
-        System.out.println("--");
-        System.out.println(bst);
-
-
-        System.out.println("--");
-        System.out.println(bst.removeMax());
-        System.out.println(bst);
-        System.out.println(bst.removeMin());
-        System.out.println(bst);
     }
 
+    // 树节点，包含left、right，和val
     private Node<E> root;
+    // 节点个数
     private int size;
 
     public int size() {
@@ -67,9 +71,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
             size++;
             return new Node<>(e);
         }
-        // 插入右子树
+        // 插入左子树
         if (node.e.compareTo(e) > 0) {
             node.left = add(node.left, e);
+            //插入右子树
         } else if (node.e.compareTo(e) < 0) {
             node.right = add(node.right, e);
         }
@@ -130,7 +135,9 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (root != null) {
             stack.push(root);
             while (!stack.isEmpty()) {
+                // 弹出栈中元素
                 Node<E> cur = stack.pop();
+                // 根左右操作，栈是后进先出，所以入栈为右左，那么出栈就会为左右
                 System.out.println(cur.e);
 
                 if (cur.right != null) {
@@ -248,6 +255,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             return rightNode;
         }
         // 当前节点的左子树等于左子树节点的右子树
+        // 返回的值为删除节点的右子树，此时他为当前node节点的左子树
         node.left = removeMin(node.left);
         return node;
     }
@@ -277,6 +285,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (node == null) {
             return null;
         }
+        // 移除左子树
         if (e.compareTo(node.e) < 0) {
             node.left = remove(node.left, e);
             return node;
@@ -284,8 +293,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
             node.right = remove(node.right, e);
             return node;
         } else {
+            // 如果删除节点左子树为空
             if (node.left == null) {
+                //  获取器right
                 Node<E> rightNode = node.right;
+                // 返回其右子树
                 node.right = null;
                 size--;
                 return rightNode;
@@ -295,6 +307,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
                 size--;
                 return leftNode;
             }   // 如果存在左右孩子节点，找到node的后继，右节点的左节点
+            // 找到右子树最小的节点
             Node<E> successor = minimum(node.right);
             successor.right = removeMin(node.right);
             successor.left = node.left;
