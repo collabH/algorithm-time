@@ -7,8 +7,10 @@ package org.datastructure.linkedlist;
  * @date: 2020/10/20 11:31 下午
  */
 public class LinkedList<E> {
+    //链表元素节点
     private class Node {
         E data;
+        // 下个节点
         Node next;
 
         public Node(E data, Node next) {
@@ -55,9 +57,9 @@ public class LinkedList<E> {
             pred = pred.next;
         }
         // 在pred和pred.next中间插入新值e
+        // pred的下一个节点指向当前e节点，e节点的next指向pred的next
         pred.next = new Node(e, pred.next);
         size++;
-
     }
 
     public void addFirst(E e) {
@@ -117,6 +119,7 @@ public class LinkedList<E> {
             prev = prev.next;
         }
         Node deleteNode = prev.next;
+        // prev的next指向需要删除节点的next
         prev.next = deleteNode.next;
         // 移除删除节点引用
         deleteNode.next = null;
