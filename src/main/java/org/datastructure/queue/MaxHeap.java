@@ -2,6 +2,8 @@ package org.datastructure.queue;
 
 import org.datastructure.array.Arr;
 
+import java.rmi.MarshalledObject;
+
 /**
  * @fileName: PriorityQueue.java
  * @description: 自定义优先级队列
@@ -9,6 +11,7 @@ import org.datastructure.array.Arr;
  * @date: 2020/11/1 2:06 下午
  */
 public class MaxHeap<E extends Comparable<E>> {
+    // 底层使用数组实现
     private Arr<E> data;
 
     public MaxHeap(int cap) {
@@ -45,6 +48,7 @@ public class MaxHeap<E extends Comparable<E>> {
 
     public void add(E e) {
         data.addLast(e);
+        // 上浮
         siftUp(data.size() - 1);
     }
 
@@ -59,6 +63,7 @@ public class MaxHeap<E extends Comparable<E>> {
         E max = findMax();
         data.swap(0, data.size() - 1);
         data.remove(data.size() - 1);
+        // 下层0
         siftDown(0);
         return max;
     }
@@ -70,6 +75,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * @param index
      */
     private void siftUp(int index) {
+        // 如果index的parent小于index，则切换parent和index的位置，并且index赋值为parent
         while (index > 0 && data.get(parent(index)).compareTo(data.get(index)) < 0) {
             data.swap(parent(index), index);
             index = parent(index);
@@ -83,7 +89,9 @@ public class MaxHeap<E extends Comparable<E>> {
      */
     private void siftDown(int index) {
         while (leftChild(index) < data.size()) {
+            // 找到index的左孩子
             int j = leftChild(index);
+            // 左index+1小于数据大小并且获取左index+1大于左
             if (j + 1 < data.size() && data.get(j + 1).compareTo(data.get(j)) > 0) {
                 j = rightChild(index);
             }
@@ -127,6 +135,9 @@ public class MaxHeap<E extends Comparable<E>> {
         System.out.println(map);
 
         System.out.println(map.extractMax());
+        System.out.println(map);
+
+        map.replace(7);
         System.out.println(map);
     }
 }
