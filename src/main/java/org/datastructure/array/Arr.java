@@ -19,8 +19,9 @@ public class Arr<E> {
         System.out.println(arr);
     }
 
+    // 存储数据
     private final E[] data;
-
+    // 数据大小
     private int size;
 
     public Arr() {
