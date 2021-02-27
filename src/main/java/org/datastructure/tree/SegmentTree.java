@@ -14,12 +14,14 @@ public class SegmentTree<E> {
     private Merger<E> merger;
 
     public SegmentTree(E[] arr, Merger<E> merger) {
+        // 创建存储数据结果集
         this.data = (E[]) new Object[arr.length];
         this.merger = merger;
         for (int i = 0; i < arr.length; i++) {
             data[i] = arr[i];
         }
         tree = (E[]) new Object[4 * arr.length];
+        // 构建线段树
         buildSegmentTree(0, 0, data.length - 1);
     }
 
