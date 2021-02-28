@@ -16,12 +16,13 @@ public class SegmentTree<E> {
     public SegmentTree(E[] arr, Merger<E> merger) {
         // 创建存储数据结果集
         this.data = (E[]) new Object[arr.length];
+        // 数据合并器
         this.merger = merger;
         for (int i = 0; i < arr.length; i++) {
             data[i] = arr[i];
         }
         tree = (E[]) new Object[4 * arr.length];
-        // 构建线段树
+        // 构建线段树，构建l和r范围的线段树
         buildSegmentTree(0, 0, data.length - 1);
     }
 

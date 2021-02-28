@@ -12,6 +12,7 @@ public class Trie {
     private static class Node {
         //是否是一个单词
         public boolean isWord;
+        // 存储下一个单词节点
         public TreeMap<Character, Node> next;
 
         public Node(boolean isWord) {
@@ -56,6 +57,7 @@ public class Trie {
 
     public boolean contains(String word) {
         Node cur = this.root;
+        // 遍历word，判断是否在字典树中
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
             if (!cur.next.containsKey(c)) {
