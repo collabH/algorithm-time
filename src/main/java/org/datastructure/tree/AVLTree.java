@@ -22,6 +22,11 @@ public class AVLTree<E extends Comparable<E>> {
             bst.add(num);
         }
 
+        bst.add(10);
+        bst.add(11);
+        bst.add(14);
+        bst.add(15);
+
         System.out.println(bst.isBalanced());
         System.out.println(bst.isBST());
     }
@@ -53,6 +58,7 @@ public class AVLTree<E extends Comparable<E>> {
         if (node == null) {
             return 0;
         }
+        // 左子树的高度和右子树的高度差
         return getHeight(node.left) - getHeight(node.right);
     }
 
@@ -68,12 +74,13 @@ public class AVLTree<E extends Comparable<E>> {
             size++;
             return new Node<>(e);
         }
-        // 插入右子树
+        // 插入左子树
         if (node.e.compareTo(e) > 0) {
             node.left = add(node.left, e);
         } else if (node.e.compareTo(e) < 0) {
             node.right = add(node.right, e);
         }
+        // 平衡AVL树
         return maintainBalance(node);
     }
 
@@ -410,7 +417,7 @@ public class AVLTree<E extends Comparable<E>> {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
-        // RL
+        // RL 左子树小于右子树，并且左子树的左子树大于左子树的右子树
         if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
