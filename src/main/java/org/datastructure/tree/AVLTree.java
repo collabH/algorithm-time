@@ -41,6 +41,7 @@ public class AVLTree<E extends Comparable<E>> {
         root = add(root, e);
     }
 
+    // 获得树的高度
     private int getHeight(Node<E> node) {
         if (node == null) {
             return 0;

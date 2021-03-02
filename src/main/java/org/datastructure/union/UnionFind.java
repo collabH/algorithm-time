@@ -9,7 +9,9 @@ package org.datastructure.union;
 public interface UnionFind {
     int getSize();
 
+    // 判断俩个节点是否连接
     boolean isConnected(int p, int q);
 
+    // 连接p和q
     void unionElements(int p, int q);
 }

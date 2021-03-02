@@ -72,7 +72,7 @@ public class Trie {
         Node cur = this.root;
         for (int i = 0; i < prefix.length(); i++) {
             char c = prefix.charAt(i);
-            if (!cur.next.containsKey(c)){
+            if (!cur.next.containsKey(c)) {
                 return false;
             }
             cur = cur.next.get(c);
@@ -80,9 +80,13 @@ public class Trie {
         return true;
     }
 
+
     public static void main(String[] args) {
         Trie trie = new Trie();
-        trie.add("hello");
-        System.out.println(trie.isPrefix("hell"));
+        trie.add("1261109615");
+        trie.add("9999999999");
+        trie.add("15093231212");
+        trie.add("23412353512");
+        System.out.println(trie.contains("1261109615"));
     }
 }

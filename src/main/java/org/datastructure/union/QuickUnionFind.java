@@ -13,6 +13,7 @@ public class QuickUnionFind implements UnionFind {
     private int[] size;
 
     public QuickUnionFind(int size) {
+        //初始化元素
         id = new int[size];
         // 将集合编号指向自己
         for (int i = 0; i < id.length; i++) {
@@ -46,6 +47,7 @@ public class QuickUnionFind implements UnionFind {
             return;
         }
         for (int i = 0; i < id.length; i++) {
+            // 联通p q，使id[p]=q
             if (id[i] == rootP) {
                 id[i] = rootQ;
             }
