@@ -117,6 +117,7 @@ public class RBTree<K extends Comparable<K>, V> {
         if (isRed(node.left) && isRed(node.left.left))
             node = rightRotate(node);
 
+        // 如果一个节点是红色则他的孩子节点都是黑色
         if (isRed(node.left) && isRed(node.right))
             flipColors(node);
 
