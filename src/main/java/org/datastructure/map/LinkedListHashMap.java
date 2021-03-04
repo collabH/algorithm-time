@@ -34,7 +34,7 @@ public class LinkedListHashMap<K, V> implements Map<K, V> {
                     '}';
         }
     }
-
+    // 定义虚拟节点
     private Node dummyHead;
     private int size;
 
@@ -61,6 +61,7 @@ public class LinkedListHashMap<K, V> implements Map<K, V> {
         }
         Node cur = this.dummyHead.next;
         Node prev = this.dummyHead;
+        // 寻找需要移除的节点cur和其前一个节点
         while (cur != null) {
             if (cur.k == k) {
                 break;

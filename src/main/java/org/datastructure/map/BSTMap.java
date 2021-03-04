@@ -10,6 +10,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     private class Node {
         public K k;
         public V v;
+        // 左右子树
         public Node left, right;
 
         public Node(K k, V v) {
@@ -30,6 +31,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
+    // root节点
     private Node root;
     private int size;
 
@@ -47,11 +49,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
             size++;
             return new Node(k, v);
         }
+        // 判断如果插入key在左子树
         if (node.k.compareTo(k) > 0) {
             node.left = add(node.left, k, v);
+            // 如果插入key在右子树
         } else if (node.k.compareTo(k) < 0) {
             node.right = add(node.right, k, v);
         } else {
+            // 替换value值
             node.v = v;
         }
         return node;
@@ -94,24 +99,33 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
                 Node rightNode = node.right;
                 node.right = null;
                 size--;
+                // 右子树为根节点
                 return rightNode;
             } else if (node.right == null) {
                 Node leftNode = node.left;
                 node.left = null;
                 size--;
+                // 左子树为根节点
                 return leftNode;
-            }   // 如果存在左右孩子节点，找到node的后继，右节点的左节点
+            }
+            // 画图更合适
+            // 如果存在左右孩子节点，找到node的后继，右节点的左节点
+            // 找到左子数的最大节点
             Node successor = maxNode(node.left);
+            // 移除最大节点，左子树的最大节点的左孩子等于左子树的左孩子
             successor.left = removeMax(node.left);
+            // 左子树的最大节点的右孩子等于节点的右孩子
             successor.right = node.right;
             return successor;
         }
     }
 
     private Node removeMax(Node node) {
+        // 如果右子树为null，则移除node节点，新的树为左子树
         if (node.right == null) {
             return node.left;
         }
+        // 否则递归
         node.right = removeMax(node.right);
         return node;
     }
