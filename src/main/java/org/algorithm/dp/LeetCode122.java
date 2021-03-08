@@ -22,6 +22,11 @@ public class LeetCode122 {
         return dp_i_0;
     }
 
+    public static void main(String[] args) {
+        LeetCode122 leetCode122 = new LeetCode122();
+        int[] arr = new int[]{7, 1, 5, 3, 6, 4};
+        System.out.println(leetCode122.maxProfitArr(arr));
+    }
 
     public int maxProfitArr(int[] prices) {
         int n = prices.length;
@@ -36,8 +41,8 @@ public class LeetCode122 {
                 dp[i][1] = -prices[i];
                 continue;
             }
-            dp[i][0] = Math.max(dp[i][0], dp[i-1][1] + prices[i]);
-            dp[i][1] = Math.max(dp[i][1], dp[i-1][0] - prices[i]);
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
         return dp[n - 1][0];
     }
